@@ -34,10 +34,11 @@ for link in links:
       stats.append(i.get_text())
   turtle_data[turtle_name] = stats
 
+print("password:")
 statdb = mysql.connector.connect(
         host = "localhost",
         user = "root",
-        password = "vCAeoLUzYvYH8Ckb"
+        password = input() 
         )
 
 print(turtle_data)  
