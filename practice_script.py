@@ -38,7 +38,19 @@ print("password:")
 statdb = mysql.connector.connect(
         host = "localhost",
         user = "root",
-        password = input() 
+        password = input(),
+        database="turtles"
         )
 
-print(turtle_data)  
+mycursor = statdb.cursor()
+
+for t in turtle_data:
+  sql = "INSERT INTO stats (name, age, weight, sex, breed, source) VALUES (%s, %s, %s, %s, %s)"
+  val = (t[0], t[1], t[2], t[3], t[4])
+
+mycursor.execute(sql, val)
+statdb.commit()
+
+sql = "SELECT * FROM stats"
+mycursor.execute(sql)
+statdb.commit()
