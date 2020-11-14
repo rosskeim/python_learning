@@ -34,23 +34,23 @@ for link in links:
       stats.append(i.get_text())
   turtle_data[turtle_name] = stats
 
-print("password:")
 statdb = mysql.connector.connect(
         host = "localhost",
         user = "root",
-        password = input(),
+        password = "vCAeoLUzYvYH8Ckb",
         database="turtles"
         )
 
 mycursor = statdb.cursor()
+print(turtle_data)
 
-for t in turtle_data:
+"""for t in turtle_data:
   sql = "INSERT INTO stats (name, age, weight, sex, breed, source) VALUES (%s, %s, %s, %s, %s)"
   val = (t[0], t[1], t[2], t[3], t[4])
 
 mycursor.execute(sql, val)
-statdb.commit()
+statdb.commit()"""
 
 sql = "SELECT * FROM stats"
 mycursor.execute(sql)
-statdb.commit()
+#statdb.commit()
