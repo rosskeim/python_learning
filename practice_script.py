@@ -26,31 +26,44 @@ for link in links:
   webpage = requests.get(prefix + turtle_name.get_text().lower() + '.html')
   turtle = BeautifulSoup(webpage.content, "html.parser")
   stats = []
-  items = turtle.find_all('ul')
     
-  print(type(items))
-  for i in items:
-      print(i)
-      stats.append(i.get_text())
-  turtle_data[turtle_name] = stats
+  for i in turtle.find_all("li"):
+    stats.clear()
+    print(i)
+    #print(type(i))
+    #print(i.get_text().split(' ', 2))
+    j = i.get_text().split(' ', 2) 
+    if(j[0] == "AGE:"):
+        stats.append(float(j[1]))
+    elif(j[0] == "WEIGHT:"):
+        stats.append(float(j[1]))
+    elif(j[0] == "SEX:"):
+        if(j[1] == "Male"):
+            stats.append('M')
+        else:
+            stats.append('F')
+    else:
+        stats.append(j[1].join(j[2]))
+    #turtle_data[turtle_name] = stats
+    print(stats)
 
-statdb = mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        password = "vCAeoLUzYvYH8Ckb",
-        database="turtles"
-        )
+#print(turtle_data)
 
-mycursor = statdb.cursor()
-print(turtle_data)
+#statdb = mysql.connector.connect(
+#        host = "localhost",
+#        user = "root",
+#        password = "",
+#        database="turtles"
+#        )
 
-"""for t in turtle_data:
-  sql = "INSERT INTO stats (name, age, weight, sex, breed, source) VALUES (%s, %s, %s, %s, %s)"
-  val = (t[0], t[1], t[2], t[3], t[4])
+#mycursor = statdb.cursor()
 
-mycursor.execute(sql, val)
-statdb.commit()"""
+#    sql = "INSERT INTO stats (name, age, weight, sex, breed, source) VALUES (%s, %s, %s, %s, %s)"
+#    val = (t[0], t[1], t[2], t[3], t[4])
 
-sql = "SELECT * FROM stats"
-mycursor.execute(sql)
+#mycursor.execute(sql, val)
+#statdb.commit()
+
+#sql = "SELECT * FROM stats"
+#mycursor.execute(sql)
 #statdb.commit()
