@@ -22,16 +22,11 @@ for link in links:
   webpage = requests.get(link)
   turtle = BeautifulSoup(webpage.content, "html.parser")
   turtle_name = turtle.select(".name")[0]
-  turtle_data[turtle_name.get_text()] = []
   webpage = requests.get(prefix + turtle_name.get_text().lower() + '.html')
   turtle = BeautifulSoup(webpage.content, "html.parser")
   stats = []
     
   for i in turtle.find_all("li"):
-    stats.clear()
-    print(i)
-    #print(type(i))
-    #print(i.get_text().split(' ', 2))
     j = i.get_text().split(' ', 2) 
     if(j[0] == "AGE:"):
         stats.append(float(j[1]))
@@ -43,11 +38,11 @@ for link in links:
         else:
             stats.append('F')
     else:
-        stats.append(j[1].join(j[2]))
-    #turtle_data[turtle_name] = stats
+        stats.append(j[1] + " " + j[2])
     print(stats)
+    turtle_data[turtle_name] = stats
 
-#print(turtle_data)
+print(turtle_data)
 
 #statdb = mysql.connector.connect(
 #        host = "localhost",
