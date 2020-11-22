@@ -49,7 +49,7 @@ print(turtle_data)
 statdb = mysql.connector.connect(
         host = "localhost",
         user = "root"
-        password = base64.b64decode("dkNBZW9MVXpZdllIOENrYg==')
+        password = base64.b64decode("dkNBZW9MVXpZdllIOENrYg==")
         database="turtles"
         )
 mycursor = statdb.cursor()
