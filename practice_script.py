@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import mysql.connector
+import base64
 
 prefix = "https://content.codecademy.com/courses/beautifulsoup/"
 webpage_response = requests.get('https://content.codecademy.com/courses/beautifulsoup/shellter.html')
@@ -44,21 +45,21 @@ for link in links:
 
 print(turtle_data)
 
-#statdb = mysql.connector.connect(
-#        host = "localhost",
-#        user = "root",
-#        password = "",
-#        database="turtles"
-#        )
+statdb = mysql.connector.connect(
+        host = "localhost",
+        user = "root"
+        password = base64.b64decode("dkNBZW9MVXpZdllIOENrYg==')
+        database="turtles"
+        )
+mycursor = statdb.cursor()
 
-#mycursor = statdb.cursor()
+for key, val in turtle_data.items():
+    insert = "INSERT INTO stats (name, age, weight, sex, breed, source) VALUES (%s, %s, %s, %s, %s, %s)"
+    values = (key, val[0], val[1], val[2], val[3], val[4])
+    mycursor.execute(insert, values)
 
-#    sql = "INSERT INTO stats (name, age, weight, sex, breed, source) VALUES (%s, %s, %s, %s, %s)"
-#    val = (t[0], t[1], t[2], t[3], t[4])
+statdb.commit()
 
-#mycursor.execute(sql, val)
-#statdb.commit()
-
-#sql = "SELECT * FROM stats"
-#mycursor.execute(sql)
-#statdb.commit()
+sql = "SELECT * FROM stats"
+mycursor.execute(sql)
+statdb.commit()
