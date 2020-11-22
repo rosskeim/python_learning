@@ -43,7 +43,6 @@ for link in links:
         stats.append(j[1] + " " + j[2])
     turtle_data[turtle_name] = stats
 
-<<<<<<< HEAD
 print(turtle_data)
 
 statdb = mysql.connector.connect(
@@ -83,4 +82,3 @@ statdb.commit()
     #sql = "SELECT * FROM stats"
     #mycursor.execute(sql)
     #statdb.commit()
->>>>>>> fafd085c41a12fc52bdc64ad1b1e62b82bd4982e
