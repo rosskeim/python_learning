@@ -43,33 +43,13 @@ for link in links:
         stats.append(j[1] + " " + j[2])
     turtle_data[turtle_name] = stats
 
-<<<<<<< HEAD
-    statdb = mysql.connector.connect(
-	host = "localhost",
-        user = "root",
-        password = "",
-        database="turtles"
-        )
-
-    mycursor = statdb.cursor()
-    print(stats)
-    #sql = "INSERT INTO stats (name, age, weight, sex, breed, source) VALUES (%s, %s, %s, %s, %s)"
-    #val = (stats[0], stats[1], stats[2], stats[3], stats[4])
-
-    #mycursor.execute(sql, val)
-    #statdb.commit()
-
-    #sql = "SELECT * FROM stats"
-    #mycursor.execute(sql)
-    #statdb.commit()
-=======
 print(turtle_data)
 
 statdb = mysql.connector.connect(
-        host = "localhost",
-        user = "root"
-        password = base64.b64decode("dkNBZW9MVXpZdllIOENrYg==')
-        database="turtles"
+        host = 'localhost',
+        user = 'root',
+        password = 'vCAeoLUzYvYH8Ckb',
+        database='turtles'
         )
 mycursor = statdb.cursor()
 
@@ -82,5 +62,3 @@ statdb.commit()
 
 sql = "SELECT * FROM stats"
 mycursor.execute(sql)
-statdb.commit()
->>>>>>> 1d5a11862e287eeb6c221083f332101532449006
